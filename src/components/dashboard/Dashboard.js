@@ -36,3 +36,4 @@ export default compose(
   connect(mapStateToProps),
   firestoreConnect([{ collection: 'projects' }])
 )(Dashboard);
+//when ever firestore database changes firebase reduser will update the change 
