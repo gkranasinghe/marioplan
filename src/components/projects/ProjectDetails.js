@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => {
   //console.log(state);
@@ -11,12 +12,17 @@ const mapStateToProps = (state, ownProps) => {
   return {
     //better use projects :state.project coursera way
     project: project,
+    auth: state.firebase.auth,
   };
 };
 
 const ProjectDetails = (props) => {
-  const { project } = props;
-  console.log(project);
+  const { project, auth } = props;
+  if (!auth.uid) {
+    return <Redirect to='/signin' />;
+  }
+
+  //console.log(project);
   if (project) {
     return (
       <div className='container section project-details'>
